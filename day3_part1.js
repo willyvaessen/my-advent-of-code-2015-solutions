@@ -16,46 +16,75 @@ For example:
     ^>v< delivers presents to 4 houses in a square, including twice to the house at his starting/ending location.
     ^v^v^v^v^v delivers a bunch of presents to some very lucky children at only 2 houses.
  */
-
-const input = "^v^v^v^v^v";
-const houses = [
-    [0,0],
-    [0, 1],
-    [0, 2],
-    [0, 3],
-    [0, 4],
-    [0, 5],
-    [0, 6]];
-
-// console.log(input.length);
-// console.log(houses);
-
-let current_house = houses[0];
-// let house_horizontal = houses[0, 0];
-// let house_vertical = houses[0, 1];
-console.log(houses[4][1]);
+const input = "^>v<";
+const houses = new Set();
+const directions = input.split('');
+let horizontal = 0;
+let vertical = 0;
+let house = horizontal + "x" + vertical;
 
 
-// for (i = 0; i < input.length; i++) {
+//  Starting delivery
+//  First house is at 0x0
+horizontal = 0;
+vertical = 0;
+houses.add(house);
+console.log(houses);
+
+//  Next stop:
+console.log(directions[0]);
+horizontal += 1;
+console.log(horizontal);
+console.log(vertical);
+house = horizontal + "x" + vertical;
+console.log("Next house is: " + house);
+houses.add(house);
+
+//  Next stop:
+console.log(directions[1]);
+vertical += 1;
+console.log(horizontal);
+console.log(vertical);
+house = horizontal + "x" + vertical;
+console.log("Next house is: " + house);
+houses.add(house);
+
+//  Next stop:
+console.log(directions[2]);
+horizontal -= 1;
+console.log(horizontal);
+console.log(vertical);
+house = horizontal + "x" + vertical;
+console.log("Next house is: " + house);
+houses.add(house);
+
+//  Next stop:
+console.log(directions[3]);
+vertical -= 1;
+console.log(horizontal);
+console.log(vertical);
+house = horizontal + "x" + vertical;
+console.log("Next house is: " + house);
+houses.add(house);
 //
-//     console.log("Current house horizontal coordinate is " + house_horizontal + " and vertical coordinate is " + house_vertical);
-//     console.log(current_house);
-    // if (input[i] === "^") {
-    //     houses.push(houses[i][])
-    //     console.log("Leaving from house " + houses[i]);
-    //     console.log("Moving NORTH to house " + houses[i]);
-    //     console.log(houses[i])
-    // }
-    // else if (input[i] === "v") {
-    //     console.log("Leaving from house " + houses[i]);
-    //     console.log("Moving SOUTH");
-    // } else if (input[i] === ">") {
-    //     console.log("Leaving from house " + houses[i]);
-    //     console.log("Moving EAST");
-    // } else if (input[i] === "<") {
-    //     console.log("Leaving from house " + houses[i]);
-    //     console.log("Moving WEST");
-    // } else {
-    //     console.log("Weird input, not sure what to do.")
-    // }
-// }
+console.log(houses);
+console.log("Total houses visited is: " + houses.size)
+//
+//
+
+// console.log(directions);
+// houses.add("0x0");
+// console.log(houses);
+// houses.add("1x0");
+// console.log(houses);
+// houses.add("1x1");
+// console.log(houses);
+// houses.add("0x1");
+// console.log(houses);
+// houses.add("0x0");
+// console.log(houses);
+// houses.add("1x0");
+// console.log(houses);
+// houses.add("1x1");
+// console.log(houses);
+// console.log(houses.size);
