@@ -20,10 +20,16 @@ known to me.
 I create a .js file for each day and part and a separate file for the input.
 
 
-UPDATE 20 November 2023
+## UPDATE 20 November 2023
 It has been little over a year since I started on the Advent of Code, but due to being very busy at work, moving into 
 my new house and a lot of other circumstances, I didn't have time to continue.
 With the 2023 event coming up, I thought it was time to try and get back on track, so I will start working on day 3 now.
+
+
+## AoC 2015 Day 3, Part 2
+
+The way I interpret the assignment, both Santa and Robot Santa follow their own path, with instructions being shared.
+
 
 
 ## Disclaimer:
