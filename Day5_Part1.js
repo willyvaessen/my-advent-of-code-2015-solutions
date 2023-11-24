@@ -42,7 +42,7 @@ const input_test_naughty3 = 'dvszwmarrgswjxmb';   //  this string should return 
 //  Check for 3 vowels
 const regExp3Vowels = /(?=(.*[aeiou]){3})\w+/;
 //  Check for double letters
-const regExpDoubleLetters = /(.)\1\w+/;
+const regExpDoubleLetters = /(.)\1/;   //  Removed the w+
 //  Check for (absence of) 'ab', 'cd', 'pq' and 'xy'
 const regExpExludePatterns = /(ab|cd|pq|xy)/;
 
