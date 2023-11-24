@@ -30,7 +30,11 @@ With the 2023 event coming up, I thought it was time to try and get back on trac
 
 The way I interpret the assignment, both Santa and Robot Santa follow their own path, with instructions being shared.
 
+## AoC 2015 Day 5, Part 1
 
+Where day 4 was quite easy to do, this day proved to be a lot more difficult.
+I wasn't able to get the right answer all by myself but I did indentify which lines my test have missed. Now to try and 
+find out what I did wrong, looking at the 9 lines.
 
 ## Disclaimer:
 I'm fairly new at developing software, despite having worked in IT for many years now. My solution is probably way too 
