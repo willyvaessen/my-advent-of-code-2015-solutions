@@ -36,6 +36,13 @@ Where day 4 was quite easy to do, this day proved to be a lot more difficult.
 I wasn't able to get the right answer all by myself but I did indentify which lines my test have missed. Now to try and 
 find out what I did wrong, looking at the 9 lines.
 
+## AoC 2015 Day 6, Part 1
+
+This day's puzzle asks me to turn on/off or toggle lights in a grid.
+Not sure yet how to approach the grid, exactly so I'm starting by figuring out how to split the input file into the 
+various commands that have to be given: turn on, turn off or toggle.
+
+
 ## Disclaimer:
 I'm fairly new at developing software, despite having worked in IT for many years now. My solution is probably way too 
 large to be anywhere near efficient, but if it's on this repository, it got the job done.
