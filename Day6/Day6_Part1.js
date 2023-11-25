@@ -34,6 +34,36 @@ const INPUT = fs.readFileSync('./Day6_Input', 'utf-8').split('\n');
 // console.log(INPUT);
 // console.log(INPUT.length);
 
+//  Create the array with all the lights
+function createGridOfLights() {
+    const lights = [];
+    const rows = 1000;
+    const cols = 1000;
+    let status = "OFF";
+    for (let i = 0; i < rows; i++) {
+        lights[i] = [];
+        for (let j = 0; j < cols; j++) {
+            lights[i][j] = status;
+        }
+    }
+    return lights;
+}
+
+
+const lights = createGridOfLights();
+
+//  Create a function that counts the lights, split by "ON" and "OFF"
+function count(lights) {
+    return lights.reduce((acc, arr) => {
+        for (const item of arr) {
+            acc[item] = acc[item] !== undefined ? acc[item] + 1 : 1
+        }
+
+        return acc
+    }, {})
+}
+
+
 //  There are three different commands in the INPUT file: Turn on, Turn off and Toggle.
 //  At first I'll distinguish which one is the current command.
 
@@ -73,13 +103,13 @@ function getFromCoord(inputLine) {
     // console.log("The input line is: " + inputLine);
     // console.log(inputLine.slice(0, 7));
     if (inputLine.slice(0, 7) === "turn on".toLowerCase()) {
-        fromCoordStart = inputLine.indexOf("on".toLowerCase())+3;
+        fromCoordStart = inputLine.indexOf("on".toLowerCase()) + 3;
         // console.log("From Coord starts with: " + fromCoordStart);
     } else if (inputLine.slice(0, 7) === "turn of".toLowerCase()) {
-        fromCoordStart = inputLine.indexOf("off".toLowerCase())+4;
+        fromCoordStart = inputLine.indexOf("off".toLowerCase()) + 4;
         // console.log("From Coord starts with: " + fromCoordStart);
     } else if (inputLine.slice(0, 7) === "toggle ".toLowerCase()) {
-        fromCoordStart = inputLine.indexOf("toggle".toLowerCase())+7;
+        fromCoordStart = inputLine.indexOf("toggle".toLowerCase()) + 7;
         // console.log("From Coord starts with: " + fromCoordStart);
     } else {
         console.log("not recognized");
@@ -94,7 +124,7 @@ function getFromCoord(inputLine) {
     fromCoord = inputLine.slice(fromCoordStart, fromCoordEnd);
     // console.log("From Coordinate is: " + fromCoord);
     // console.log("From Coordinate is: " + inputLine.slice(fromCoordStart, fromCoordEnd));
-    return  fromCoord;
+    return fromCoord;
 }
 
 // getFromCoord(example1);
@@ -123,6 +153,13 @@ function getToCoord(inputLine) {
 // getToCoord(example4);
 //
 
-console.log("The assignment is to do " + checkCommand(example1) + " and start on " + getFromCoord(example1) + " all the way to " + getToCoord(example1));
-console.log("The assignment is to do " + checkCommand(example2) + " and start on " + getFromCoord(example2) + " all the way to " + getToCoord(example2));
-console.log("The assignment is to do " + checkCommand(example3) + " and start on " + getFromCoord(example3) + " all the way to " + getToCoord(example3));
+// console.log("The assignment is to do " + checkCommand(example1) + " and start on " + getFromCoord(example1) + " all the way to " + getToCoord(example1));
+// console.log("The assignment is to do " + checkCommand(example2) + " and start on " + getFromCoord(example2) + " all the way to " + getToCoord(example2));
+// console.log("The assignment is to do " + checkCommand(example3) + " and start on " + getFromCoord(example3) + " all the way to " + getToCoord(example3));
+
+
+
+
+//  Final Answer
+console.log("The final answer is: ")
+console.log(count(lights))
