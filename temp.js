@@ -1,34 +1,20 @@
-//  Declare variables
-const fs = require('fs');
-const INPUT = fs.readFileSync('./Day5_Input', 'utf-8').split('\n');
-// const INPUT = fs.readFileSync('./Day5_Lines_Missed', 'utf-8').split('\n');
+    if (inputLine.slice(0, 7) === "turn off") {
+        command = "tof";
+        console.log("The given command is to turn off!");
+        fromCoordStart = (inputLine.indexOf("turn off".toLowerCase()) + 9);
+        console.log("From Coord starts with " + inputLine[fromCoordStart]);
+    } else if (inputLine.slice(0, 6) === "turn on") {
+        command = "ton";
+        console.log("The given command is to turn on!");
+        fromCoordStart = (inputLine.indexOf("turn on".toLowerCase()) + 8);
+        console.log("From Coord starts with " + inputLine[fromCoordStart]);
 
-
-let nice_strings_amount = 0;
-const nice_strings = [];
-const naught_strings = [];
-
-
-//  Check for 3 vowels
-const regExp3Vowels = /(?=(.*[aeiou]){3})\w+/;
-//  Check for double letters
-// const regExpDoubleLetters = /(.)\1\w+/;
-const regExpDoubleLetters = /(.)\1/;
-//  Check for (absence of) 'ab', 'cd', 'pq' and 'xy'
-const regExpExludePatterns = /(ab|cd|pq|xy)/;
-
-function checkString(string_to_check) {
-    if (regExp3Vowels.test(string_to_check) && regExpDoubleLetters.test(string_to_check) && !regExpExludePatterns.test(string_to_check)) {
-        nice_strings.push(string_to_check);
-        nice_strings_amount++;
+    } else if (inputLine.slice(0, 4) === "togg".toLowerCase()) {
+        // console.log("The given command is to toggle.");
+        command = "tog";
+        fromCoordStart = (inputLine.indexOf("toggle".toLowerCase()) + 7);
+        // console.log(fromCoordStart);
+        console.log("From Coord starts with " + inputLine[fromCoordStart]);
     } else {
-        naught_strings.push(string_to_check);
+        console.log("The command is not recognized.")
     }
-    console.log("The amount of nice strings is " + nice_strings_amount);
-}
-
-
-for (let i = 0; i < INPUT.length; i++) {
-    console.log(i+1 + ":" + INPUT[i]);
-    checkString(INPUT[i]);
-}
