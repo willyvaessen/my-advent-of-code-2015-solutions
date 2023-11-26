@@ -38,20 +38,23 @@ function createGridOfLights() {
     }
     return lights;
 }
+
 const lights = createGridOfLights();
 
 const smallGrid = [];
 let totalBrightness = 0;
+
 //  Create a function that counts the total brightness"
-function getTotalBrightness(lights){
-  totalBrightness = 0;
-  console.log(lights);
-  for (let i = 0; i <lights.length; i++) {
-    for (let j = 0; j < lights[i].length; j++) {
-      console.log(lights[i][j]);
-      totalBrightness += lights[i][j];
+function getTotalBrightness(lights) {
+    totalBrightness = 0;
+    console.log(lights);
+    for (let i = 0; i < lights.length; i++) {
+        for (let j = 0; j < lights[i].length; j++) {
+            console.log(lights[i][j]);
+            totalBrightness += lights[i][j];
+        }
     }
-  } return totalBrightness;
+    return totalBrightness;
 }
 
 
@@ -108,14 +111,14 @@ function getToCoord(inputLine) {
 
 const example123 = 'turn on 123,456 through 987,654';
 
-function operate(inputLine){
+function operate(inputLine) {
     let command = checkCommand(inputLine);
     let from = getFromCoord(inputLine);
     let fromRow = parseInt(from.slice(0, from.indexOf(",")), 10);
-    let fromCol = parseInt(from.slice((from.indexOf(",")+1), (from.length)), 10);
+    let fromCol = parseInt(from.slice((from.indexOf(",") + 1), (from.length)), 10);
     let to = getToCoord(inputLine);
     let toRow = parseInt(String(to.slice(0, to.indexOf(","))), 10);
-    let toCol = parseInt(String(to.slice((to.indexOf(",")+1), (to.length))), 10);
+    let toCol = parseInt(String(to.slice((to.indexOf(",") + 1), (to.length))), 10);
     let numberOfRows = toRow - fromRow + 1;
     let numberOfColumns = toCol - fromCol + 1;
     let total = numberOfRows * numberOfColumns;
@@ -123,18 +126,23 @@ function operate(inputLine){
     //  Iterate through the rows:
     for (let i = fromRow; i <= toRow; i++) {
         //  Iterate through the columns
-        for (let j = fromCol; j <= toCol; j++){
+        for (let j = fromCol; j <= toCol; j++) {
             // console.log(i + "," + j + ":" +lights[i][j]);
             if (command === "ton".toLowerCase()) {
                 lights[i][j] += 1;
             } else if (command === "tof".toLowerCase()) {
-                lights[i][j] -= 1;
+                if (lights[i][j] > 0) {
+                    lights[i][j] -= 1;
+                } else {
+                    lights[i][j] = 0;
+                }
+
             } else if (command === "tog".toLowerCase()) {
                 lights[i][j] += 2;
             }
         }
     }
-    console.log(getTotalBrightness(lights));
+
 }
 
 example1 = 'turn on 0,0 through 0,0';
@@ -148,3 +156,6 @@ exampleAll = 'toggle 0,0 through 999,999';
 for (let i = 0; i < INPUT.length; i++) {
     operate(INPUT[i])
 }
+
+
+console.log(getTotalBrightness(lights));
