@@ -27,10 +27,14 @@ For example:
     turn off 499,499 through 500,500 would turn off (or leave off) the middle four lights.
 
 After following the instructions, how many lights are lit?
+
+SOLUTION: 569999
  */
 
 const fs = require('fs');
 const INPUT = fs.readFileSync('./Day6_Input', 'utf-8').split('\n');
+
+
 // console.log(INPUT);
 // console.log(INPUT.length);
 
@@ -157,9 +161,56 @@ function getToCoord(inputLine) {
 // console.log("The assignment is to do " + checkCommand(example2) + " and start on " + getFromCoord(example2) + " all the way to " + getToCoord(example2));
 // console.log("The assignment is to do " + checkCommand(example3) + " and start on " + getFromCoord(example3) + " all the way to " + getToCoord(example3));
 
+const example123 = 'turn on 123,456 through 987,654';
 
+function operate(inputLine){
+    // console.log("Operation Lights Started")
+    // console.log("Checking command to perform: " + checkCommand(inputLine));
+    // console.log("Starting on: " + getFromCoord(inputLine));
+    let command = checkCommand(inputLine);
+    let from = getFromCoord(inputLine);
+    let fromRow = from.slice(0, from.indexOf(","));
+    let fromCol = from.slice((from.indexOf(",")+1), (from.length));
+    // console.log(fromRow + " // " + fromCol);
+    let to = getToCoord(inputLine);
+    let toRow = to.slice(0, to.indexOf(","));
+    let toCol = to.slice((to.indexOf(",")+1), (to.length));
+    // console.log(toRow + " // " + toCol);
+    let numberOfRows = toRow - fromRow + 1;
+    let numberOfColumns = toCol - fromCol + 1;
+    let total = numberOfRows * numberOfColumns;
+    console.log(numberOfRows + " Rows x " + numberOfColumns + " Columns  = Total: " + total + " lights");
+    //  Iterate through the rows:
+    for (let i = fromRow; i <= toRow; i++) {
+        //  Iterate through the columns
+        for (let j = fromCol; j <= toCol; j++){
+            // console.log(i + "," + j + ":" +lights[i][j]);
+            if (command === "ton".toLowerCase()) {
+                lights[i][j] = "ON";
+            } else if (command === "tof".toLowerCase()) {
+                lights[i][j] = "OFF";
+            } else if (command === "tog".toLowerCase()) {
+                // console.log("Toggling status")
+                if (lights[i][j] === "ON") {
+                    lights[i][j] = "OFF";
+                } else if (lights[i][j] === "OFF") {
+                    lights[i][j] = "ON";
+                }
+            }
+        }
+    } console.log(count(lights))
+}
 
+for (let i = 0; i < INPUT.length; i++) {
+    operate(INPUT[i])
+}
+let line1 = "turn on 489,959 through 759,964";
+// operate(example123);
+// operate(example1)
+// operate(example2)
 
+// operate(line1);
 //  Final Answer
+
 console.log("The final answer is: ")
-console.log(count(lights))
+// console.log(count(lights))
