@@ -34,16 +34,12 @@ SOLUTION: 569999
 const fs = require('fs');
 const INPUT = fs.readFileSync('./Day6_Input', 'utf-8').split('\n');
 
-
-// console.log(INPUT);
-// console.log(INPUT.length);
-
 //  Create the array with all the lights
 function createGridOfLights() {
     const lights = [];
     const rows = 1000;
     const cols = 1000;
-    let status = "OFF";
+    let status = 0;
     for (let i = 0; i < rows; i++) {
         lights[i] = [];
         for (let j = 0; j < cols; j++) {
@@ -52,8 +48,6 @@ function createGridOfLights() {
     }
     return lights;
 }
-
-
 const lights = createGridOfLights();
 
 //  Create a function that counts the lights, split by "ON" and "OFF"
@@ -66,7 +60,6 @@ function count(lights) {
         return acc
     }, {})
 }
-
 
 //  There are three different commands in the INPUT file: Turn on, Turn off and Toggle.
 //  At first I'll distinguish which one is the current command.
@@ -94,11 +87,6 @@ function checkCommand(inputLine) {
     return command;
 }
 
-// checkCommand(example1);
-// checkCommand(example2);
-// checkCommand(example3);
-// checkCommand(example4);
-
 //  Determining the Start Coordinate of a line:
 
 function getFromCoord(inputLine) {
@@ -118,64 +106,31 @@ function getFromCoord(inputLine) {
     } else {
         console.log("not recognized");
     }
-    // console.log("From Coord starts with: " + fromCoordStart);
 
-    // console.log("Inputline is: " + inputLine)
     let fromCoordEnd = inputLine.indexOf("through".toLowerCase()) - 1;
-    // console.log("From Coord ends at: " + fromCoordEnd + " // " + inputLine[fromCoordEnd]);
-    // console.log("Last char of the start coord is: " + inputLine[fromCoordEnd]);
-    // console.log(inputLine[fromCoordEnd]);
     fromCoord = inputLine.slice(fromCoordStart, fromCoordEnd);
-    // console.log("From Coordinate is: " + fromCoord);
-    // console.log("From Coordinate is: " + inputLine.slice(fromCoordStart, fromCoordEnd));
     return fromCoord;
 }
-
-// getFromCoord(example1);
-// getFromCoord(example2);
-// getFromCoord(example3);
-// getFromCoord(example4);
 
 
 //  Determining the end coordinate of a line:
 function getToCoord(inputLine) {
-    // console.log(inputLine.length);
-    // console.log(inputLine[inputLine.length-1]);
-    // console.log(inputLine.indexOf("through".toLowerCase()));
     let toCoordStart = inputLine.indexOf("through".toLowerCase()) + 8;
     let toCoordFinish = inputLine.length;
-    // console.log("End coordinate starts at: " + toCoordStart + " and ends at " + toCoordFinish);
-    // console.log("End Coordinate is: " + endCoord);
     toCoord = inputLine.slice(toCoordStart, toCoordFinish)
-    // console.log(toCoord);
     return toCoord;
 }
-
-// getToCoord(example1);
-// getToCoord(example2);
-// getToCoord(example3);
-// getToCoord(example4);
-//
-
-// console.log("The assignment is to do " + checkCommand(example1) + " and start on " + getFromCoord(example1) + " all the way to " + getToCoord(example1));
-// console.log("The assignment is to do " + checkCommand(example2) + " and start on " + getFromCoord(example2) + " all the way to " + getToCoord(example2));
-// console.log("The assignment is to do " + checkCommand(example3) + " and start on " + getFromCoord(example3) + " all the way to " + getToCoord(example3));
 
 const example123 = 'turn on 123,456 through 987,654';
 
 function operate(inputLine){
-    // console.log("Operation Lights Started")
-    // console.log("Checking command to perform: " + checkCommand(inputLine));
-    // console.log("Starting on: " + getFromCoord(inputLine));
     let command = checkCommand(inputLine);
     let from = getFromCoord(inputLine);
-    let fromRow = from.slice(0, from.indexOf(","));
-    let fromCol = from.slice((from.indexOf(",")+1), (from.length));
-    // console.log(fromRow + " // " + fromCol);
+    let fromRow = parseInt(from.slice(0, from.indexOf(",")), 10);                     //  from.slice(0, from.indexOf(","))
+    let fromCol = parseInt(from.slice((from.indexOf(",")+1), (from.length)), 10);     //  from.slice((from.indexOf(",")+1), (from.length))
     let to = getToCoord(inputLine);
-    let toRow = to.slice(0, to.indexOf(","));
-    let toCol = to.slice((to.indexOf(",")+1), (to.length));
-    // console.log(toRow + " // " + toCol);
+    let toRow = parseInt(String(to.slice(0, to.indexOf(","))), 10);                   //  to.slice(0, to.indexOf(","))
+    let toCol = parseInt(String(to.slice((to.indexOf(",")+1), (to.length))), 10);             //  to.slice((to.indexOf(",")+1), (to.length))
     let numberOfRows = toRow - fromRow + 1;
     let numberOfColumns = toCol - fromCol + 1;
     let total = numberOfRows * numberOfColumns;
@@ -186,15 +141,15 @@ function operate(inputLine){
         for (let j = fromCol; j <= toCol; j++){
             // console.log(i + "," + j + ":" +lights[i][j]);
             if (command === "ton".toLowerCase()) {
-                lights[i][j] = "ON";
+                lights[i][j] = 1;
             } else if (command === "tof".toLowerCase()) {
-                lights[i][j] = "OFF";
+                lights[i][j] = 0;
             } else if (command === "tog".toLowerCase()) {
                 // console.log("Toggling status")
-                if (lights[i][j] === "ON") {
-                    lights[i][j] = "OFF";
-                } else if (lights[i][j] === "OFF") {
-                    lights[i][j] = "ON";
+                if (lights[i][j] === 1) {
+                    lights[i][j] = 0;
+                } else if (lights[i][j] === 0) {
+                    lights[i][j] = 1;
                 }
             }
         }
@@ -204,12 +159,7 @@ function operate(inputLine){
 for (let i = 0; i < INPUT.length; i++) {
     operate(INPUT[i])
 }
-let line1 = "turn on 489,959 through 759,964";
-// operate(example123);
-// operate(example1)
-// operate(example2)
 
-// operate(line1);
 //  Final Answer
 
 console.log("The final answer is: ")
