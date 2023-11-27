@@ -26,7 +26,6 @@ For example:
  */
 
 
-
 //  Get the input from external file.
 const fs = require('fs');
 const INPUT = fs.readFileSync('./Day7_Input', 'utf-8').split('\n');
@@ -39,30 +38,35 @@ const LOGIC_GATES = ["AND", "OR", "LSHIFT", "RSHIFT", "NOT"];
 function bitwiseNOT(value) {
     return ~value & 0xFFFF; // Apply bitwise NOT and mask with 0xFFFF
 }
+
 // const GATE_PATTERN = new RegExp(`(\\w+)\\s+(${LOGIC_GATES.join("|")})\\s+(\\w+)\\s*->\\s*(\\w+)`, "i");
 
 
-
-const GATE_PATTERN = new RegExp(`(${LOGIC_GATES.join("|")})`, "i"); // Add capturing groups//  "i" flag or case-insensitivity
-
 const test_string = "x AND y -> d";
 const test_stringNot = "NOT y -> i";
-const match = test_string.match(GATE_PATTERN);
 
-
-const result = GATE_PATTERN.test(test_stringNot);
-console.log(result);
-
-if (match) {
-    const operator = match[1];
-
-    console.log(`Found a match: Operator=${operator}`);
-} else {
-    console.log("No match found");
+function checkOperator(inputString) {
+    const GATE_PATTERN = new RegExp(`(${LOGIC_GATES.join("|")})`, "i"); // Add capturing groups//  "i" flag or case-insensitivity
+    const match = inputString.match(GATE_PATTERN);
+    const result = GATE_PATTERN.test(inputString);
+    // console.log(result);
+    if (match) {
+        const operator = match[1];
+        console.log(`Found a match: Operator=${operator}`);
+    } else {
+        console.log("No match found. Check if it is a number.");
+    }
 }
 
+console.log("----------------------------------------");
+for (let i = 0; i < INPUT_XMPL.length; i++) {
+    console.log(INPUT_XMPL[i]);
+    checkOperator(INPUT_XMPL[i]);
+}
+console.log("----------------------------------------");
 
-// /*  --- Below is how the example can be worked out in code.
+
+/*  --- Below is how the example can be worked out in code.
 let x = 123;
 let y = 456;
 let d = x & y;
@@ -71,7 +75,7 @@ let f = x << 2;
 let g = y >>> 2;
 let h = bitwiseNOT(x);
 let i = bitwiseNOT(y);
-console.log("--------------------------------------------------------------------------------");
+console.log("----------");
 console.log("D: " + d);
 console.log("E: " + e);
 console.log("F: " + f);
@@ -80,28 +84,10 @@ console.log("H: " + h);
 console.log("I: " + i);
 console.log("X: " + x);
 console.log("Y: " + y);
-console.log("--------------------------------------------------------------------------------");
+console.log("----------");
 */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //  Line 79: lx -> a
-
-
-
-
-
 
 /*  --- Below are examples provided by ChatGPT in order to better understand the Bitwise Operations
 
